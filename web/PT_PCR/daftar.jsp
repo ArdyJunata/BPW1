@@ -1,11 +1,7 @@
-
 <%@page import="pt_pcr.PegawaiHome"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="pt_pcr.*"%>
+<%@page import="pt_pcr.Pegawai"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    LoginDataPegawai login = (LoginDataPegawai) session.getAttribute("loginData");
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +11,6 @@
     <body>
         <%
             ArrayList<Pegawai> list = PegawaiHome.selectAll();
-            if (login.getGroup() == 1) {
-        %>
-        <h2>Selamat datang Manager</h2>
-        <%
-        } else {
-        %>
-        <h2>Selamat datang Pegawai</h2>
-        <%
-            }
         %>
         <h3>Daftar Pegawai</h3>
         <table border="1">
@@ -32,13 +19,7 @@
                 <td>Nama Pegawai</td>
                 <td>Alamat</td>
                 <td>Jabatan</td>
-                <%
-                    if (login.getGroup() == 1) {
-                %>
                 <td>Aksi</td>
-                <%
-                    }
-                %>
             </tr>
             <%
                 for (int i = 0; i < list.size(); i++) {
@@ -49,26 +30,17 @@
                 <td><%= list.get(i).getNamaPegawai()%></td>
                 <td><%= list.get(i).getAlamat()%></td>
                 <td><%= list.get(i).getJabatan()%></td>
-                <%
-                    if (login.getGroup() == 1) {
-                %>
-                <td><a href="http://localhost:8080/ArdyBPW/PT_PCR/formEditPegawai.jsp?nip=<%=list.get(i).getNip()%>">Edit</a>
-                    <a href="../DeletePegawaiAction?nip=<%=list.get(i).getNip()%>">Delete</a></td>
-                    <%
-                        }
-                    %>
+                <td>
+                    <a href="formEditPegawai.jsp?nip=<%= list.get(i).getNip()%>" >Edit</a> 
+                    |
+                    <a href="../OlahHapusPegawai?nip=<%= list.get(i).getNip()%>" >Hapus</a>
+                </td>
             </tr>
             <%
                 }
             %>
         </table>
         <br>
-        <%
-            if (login.getGroup() == 1) {
-        %>
-        <a href="http://localhost:8080/tid-master/PT_PCR/add_pegawai.html">Tambah data lagi</a>
-        <%
-            }
-        %>
+        <a href="add_pegawai.html">Tambah data lagi</a>
     </body>
 </html>
