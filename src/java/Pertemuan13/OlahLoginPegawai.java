@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Pertemuan13;
 
 import java.io.IOException;
@@ -15,21 +10,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import pt_pcr.*;
 
-/**
- *
- * @author Lab330-29
- */
 public class OlahLoginPegawai extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,20 +21,20 @@ public class OlahLoginPegawai extends HttpServlet {
             final String passManager = "123";
             final String loginPegawai = "pegawai";
             final String passPegawai = "123";
-            
+
             String user = request.getParameter("uname");
             String pass = request.getParameter("pass");
             LoginDataPegawai data;
-            
+
             RequestDispatcher control;
-            if(user.equals(loginManager) && pass.equals(passManager)) {
+            if (user.equals(loginManager) && pass.equals(passManager)) {
                 HttpSession session = request.getSession();
                 data = new LoginDataPegawai();
                 data.setUname(user);
                 data.setGroup(1);
                 session.setAttribute("loginData", data);
                 control = request.getRequestDispatcher("PT_PCR/daftar_pegawai.jsp");
-            } else if(user.equals(loginPegawai) && pass.equals(passPegawai)) {
+            } else if (user.equals(loginPegawai) && pass.equals(passPegawai)) {
                 HttpSession session = request.getSession();
                 data = new LoginDataPegawai();
                 data.setUname(user);

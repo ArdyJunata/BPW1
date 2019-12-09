@@ -5,6 +5,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     LoginDataPegawai login = (LoginDataPegawai) session.getAttribute("loginData");
+    String name = login.getUname();
 %>
 <!DOCTYPE html>
 <html>
@@ -15,16 +16,8 @@
     <body>
         <%
             ArrayList<Pegawai> list = PegawaiHome.selectAll();
-            if (login.getGroup() == 1) {
         %>
-        <h2>Selamat datang Manager</h2>
-        <%
-        } else {
-        %>
-        <h2>Selamat datang Pegawai</h2>
-        <%
-            }
-        %>
+        <h2>Selamat datang <%=name%></h2>
         <h3>Daftar Pegawai</h3>
         <table border="1">
             <tr>
@@ -52,8 +45,10 @@
                 <%
                     if (login.getGroup() == 1) {
                 %>
-                <td><a href="http://localhost:8080/ArdyBPW/PT_PCR/formEditPegawai.jsp?nip=<%=list.get(i).getNip()%>">Edit</a>
-                    <a href="../DeletePegawaiAction?nip=<%=list.get(i).getNip()%>">Delete</a></td>
+                <td><a href="http://localhost:8080/ArdyBPW/PT_PCR/
+                       formEditPegawai.jsp?nip=<%=list.get(i).getNip()%>">Edit</a>
+                    <a href="../DeletePegawaiAction?
+                       nip=<%=list.get(i).getNip()%>">Delete</a></td>
                     <%
                         }
                     %>
